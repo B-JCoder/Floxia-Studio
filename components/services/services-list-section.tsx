@@ -307,12 +307,12 @@ function ServiceSection({
     <div
       ref={ref}
       id={service.id}
-      className="relative border-t border-foreground/10 py-24 lg:py-32 scroll-mt-20"
+      className="relative border-t border-foreground/10 py-16 sm:py-20 lg:py-28 scroll-mt-[112px]"
     >
       {/* Section container */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
         <div
-          className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${
+          className={`grid lg:grid-cols-2 gap-10 lg:gap-20 items-center ${
             isReversed ? "lg:[&>*:first-child]:order-2" : ""
           }`}
         >
@@ -323,36 +323,36 @@ function ServiceSection({
             }`}
           >
             {/* Label row */}
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <span className="font-mono text-xs text-muted-foreground">{service.number}</span>
-              <span className="w-8 h-px bg-foreground/20" />
-              <span className="px-3 py-1 rounded-full border border-foreground/15 font-mono text-xs text-muted-foreground">
+              <span className="w-6 h-px bg-foreground/20" />
+              <span className="px-2.5 py-0.5 rounded-full border border-foreground/15 font-mono text-xs text-muted-foreground">
                 {service.tag}
               </span>
             </div>
 
             {/* Icon + Title */}
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-foreground/8 flex items-center justify-center shrink-0 mt-1">
-                <Icon className="w-5 h-5 text-foreground" />
+            <div className="flex items-start gap-3 sm:gap-4 mb-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-foreground/8 flex items-center justify-center shrink-0 mt-0.5 sm:mt-1">
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground" />
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.1] tracking-tight text-foreground">
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-[2.4rem] leading-[1.1] tracking-tight text-foreground">
                 {service.title}
               </h2>
             </div>
 
             {/* Subtitle */}
-            <p className="text-sm font-mono text-muted-foreground mb-6 pl-16">
-              "{service.subtitle}"
+            <p className="text-xs sm:text-sm font-mono text-muted-foreground mb-5 pl-0 sm:pl-14 lg:pl-16">
+              &quot;{service.subtitle}&quot;
             </p>
 
             {/* Lead */}
-            <p className="text-base sm:text-lg text-foreground/80 leading-relaxed mb-5 pl-16">
+            <p className="text-base sm:text-lg text-foreground/80 leading-relaxed mb-4 pl-0 sm:pl-14 lg:pl-16">
               {service.lead}
             </p>
 
             {/* Body paragraphs */}
-            <div className="space-y-4 pl-16 mb-10">
+            <div className="space-y-3 pl-0 sm:pl-14 lg:pl-16 mb-8">
               {service.paras.map((para, i) => (
                 <p
                   key={i}
@@ -367,10 +367,10 @@ function ServiceSection({
             </div>
 
             {/* CTA */}
-            <div className="pl-16">
+            <div className="pl-0 sm:pl-14 lg:pl-16">
               <Link
                 href="/onboarding"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-primary-foreground text-sm font-medium hover:bg-foreground/90 transition-all group"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-foreground text-primary-foreground text-sm font-medium hover:bg-foreground/90 transition-all group"
               >
                 Start This Service
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -384,8 +384,8 @@ function ServiceSection({
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            {/* Abstract visual */}
-            <div className="mb-10">
+            {/* Abstract visual — hidden on mobile/tablet to save space */}
+            <div className="hidden lg:block mb-8">
               <ServiceVisual number={service.number} icon={Icon} />
             </div>
 
@@ -433,22 +433,22 @@ function ServicesIndex() {
   );
 
   return (
-    <div className="border-t border-b border-foreground/10 bg-background sticky top-0 z-30 overflow-x-auto">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex items-center gap-1 py-0">
+    <div className="border-t border-b border-foreground/10 bg-background/95 backdrop-blur-sm sticky top-0 z-30 overflow-x-auto">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex items-center gap-0 sm:gap-1">
           {services.map((s, i) => (
             <a
               key={s.id}
               href={`#${s.id}`}
               onClick={(e) => handleClick(e, s.id, i)}
-              className={`flex items-center gap-2 px-4 py-4 text-xs font-mono whitespace-nowrap border-b-2 transition-all duration-200 ${
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-3.5 text-[10px] sm:text-xs font-mono whitespace-nowrap border-b-2 transition-all duration-200 ${
                 active === i
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground hover:border-foreground/30"
               }`}
             >
-              <span className="opacity-50">{s.number}</span>
-              <span className="hidden sm:inline">{s.tag}</span>
+              <span className="opacity-40">{s.number}</span>
+              <span className="hidden md:inline">{s.tag}</span>
             </a>
           ))}
         </div>
@@ -465,22 +465,22 @@ export function ServicesListSection() {
   return (
     <div>
       {/* ── Intro header ── */}
-      <section ref={headerRef} className="py-20 lg:py-28 border-t border-foreground/10">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <section ref={headerRef} className="py-16 sm:py-20 lg:py-28 border-t border-foreground/10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
           <div
             className={`max-w-4xl transition-all duration-1000 ${
               headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-3 text-sm font-mono text-muted-foreground mb-8">
-              <span className="w-8 h-px bg-foreground/30" />
+            <div className="flex items-center gap-3 text-xs sm:text-sm font-mono text-muted-foreground mb-6">
+              <span className="w-6 sm:w-8 h-px bg-foreground/30" />
               10 Services · One Expert Team
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl leading-[1.05] tracking-tight mb-8">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-7xl leading-[1.05] tracking-tight mb-5 sm:mb-8">
               Every service your business needs to{" "}
               <span className="text-stroke">dominate online</span>
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
+            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed max-w-3xl">
               Below is a comprehensive breakdown of every service we provide. Whatever your
               business model, technology requirement, or industry — we have the skills, experience,
               and passion to build it right. No outsourcing. No fragmented handoffs. One team.
@@ -489,7 +489,7 @@ export function ServicesListSection() {
 
           {/* Quick-stat row */}
           <div
-            className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mt-14 transition-all duration-700 delay-300 ${
+            className={`grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-10 sm:mt-14 transition-all duration-700 delay-300 ${
               headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
@@ -501,10 +501,10 @@ export function ServicesListSection() {
             ].map((s, i) => (
               <div
                 key={i}
-                className="p-5 rounded-2xl border border-foreground/10 hover:border-foreground/25 transition-all duration-300"
+                className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-foreground/10 hover:border-foreground/25 transition-all duration-300"
               >
-                <span className="block font-display text-3xl text-foreground">{s.val}</span>
-                <span className="block font-mono text-xs text-muted-foreground uppercase tracking-widest mt-1">
+                <span className="block font-display text-2xl sm:text-3xl text-foreground">{s.val}</span>
+                <span className="block font-mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest mt-1">
                   {s.label}
                 </span>
               </div>

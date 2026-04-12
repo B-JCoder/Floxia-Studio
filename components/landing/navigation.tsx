@@ -68,7 +68,7 @@ export function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="#"
+              href="/#work"
               className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}
             >
               See Our Work
@@ -129,26 +129,33 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Bottom CTAs */}
+          {/* Bottom CTAs — same as desktop */}
           <div
-            className={`flex gap-4 pt-8 border-t border-foreground/10 transition-all duration-500 ${
+            className={`flex flex-col sm:flex-row gap-3 pt-8 border-t border-foreground/10 transition-all duration-500 ${
               isMobileMenuOpen
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <Button
-              variant="outline"
-              className="flex-1 rounded-full h-14 text-base"
+            <a
+              href="/#work"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex-1"
+            >
+              <Button
+                variant="outline"
+                className="w-full rounded-full h-13 text-base border-foreground/20 hover:bg-foreground/5"
+              >
+                See Our Work
+              </Button>
+            </a>
+            <Link
+              href="/onboarding"
+              className="flex-1"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Sign in
-            </Button>
-            <Link href="/onboarding" className="flex-1 w-full" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                className="w-full bg-foreground text-background rounded-full h-14 text-base"
-              >
+              <Button className="w-full bg-foreground text-background rounded-full h-13 text-base hover:bg-foreground/90">
                 Start Your Project
               </Button>
             </Link>

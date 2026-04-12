@@ -55,101 +55,85 @@ export function AboutProcessSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) setIsVisible(true); },
-      { threshold: 0.08 }
+      { threshold: 0.05 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={ref} className="relative py-24 lg:py-36 bg-background overflow-hidden border-t border-foreground/10">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-foreground/[0.03] rounded-full blur-[100px] pointer-events-none" />
+    <section ref={ref} className="relative py-20 sm:py-24 lg:py-36 bg-background overflow-hidden border-t border-foreground/10">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-foreground/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 
         {/* Header */}
-        <div className={`text-center max-w-2xl mx-auto mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <div className="flex items-center justify-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-foreground/30" />
+        <div className={`text-center max-w-2xl mx-auto mb-12 sm:mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-mono text-muted-foreground mb-5">
+            <span className="w-6 sm:w-8 h-px bg-foreground/30" />
             Our Process
-            <span className="w-8 h-px bg-foreground/30" />
+            <span className="w-6 sm:w-8 h-px bg-foreground/30" />
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display leading-[1.1] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display leading-[1.1] tracking-tight mb-4 sm:mb-5">
             A Proven Process That{" "}
             <span className="text-stroke">Delivers Results</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
             Great websites are not built by accident. They are the product of a disciplined,
             well-structured process that puts client goals at the center of every decision.
           </p>
         </div>
 
-        {/* Stages — alternating timeline feel on desktop */}
+        {/* Stages grid — 1 col mobile, 2 col tablet, left/right split on desktop */}
         <div className="relative">
-          {/* Vertical connector line (desktop) */}
-          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-foreground/10" />
 
-          <div className="space-y-6 lg:space-y-0">
+          {/* Vertical connector line (lg only) */}
+          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-px bg-foreground/10 z-0" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
             {stages.map((stage, i) => {
               const Icon = stage.icon;
               const isLeft = i % 2 === 0;
+
               return (
                 <div
                   key={i}
-                  className={`relative lg:grid lg:grid-cols-2 lg:gap-16 items-center transition-all duration-700 lg:mb-10 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  style={{ transitionDelay: `${200 + i * 100}ms` }}
+                  className={`
+                    relative
+                    lg:flex lg:items-center
+                    ${isLeft ? "lg:justify-start lg:pr-[calc(50%+2rem)]" : "lg:justify-end lg:pl-[calc(50%+2rem)]"}
+                    transition-all duration-700
+                    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                  `}
+                  style={{ transitionDelay: `${180 + i * 100}ms` }}
                 >
-                  {/* Left slot */}
-                  <div className={`${isLeft ? "lg:text-right lg:pr-16" : "lg:order-3 lg:pl-16"}`}>
-                    {isLeft ? (
-                      <StageCard stage={stage} Icon={Icon} />
-                    ) : (
-                      <div className="hidden lg:block" />
-                    )}
+                  {/* Center dot (lg only) */}
+                  <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border-2 border-foreground/20 bg-background items-center justify-center z-10 shrink-0">
+                    <span className="font-mono text-[10px] text-muted-foreground">{stage.number}</span>
                   </div>
 
-                  {/* Center dot */}
-                  <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-foreground/20 bg-background items-center justify-center z-10">
-                    <span className="font-mono text-xs text-muted-foreground">{stage.number}</span>
-                  </div>
-
-                  {/* Right slot */}
-                  <div className={`${!isLeft ? "lg:text-left lg:pl-16 lg:order-3" : "lg:pl-16"}`}>
-                    {!isLeft ? (
-                      <StageCard stage={stage} Icon={Icon} />
-                    ) : (
-                      <div className="hidden lg:block" />
-                    )}
-                  </div>
-
-                  {/* Mobile card (always visible) */}
-                  <div className="lg:hidden">
-                    <StageCard stage={stage} Icon={Icon} />
+                  {/* Card */}
+                  <div className="group flex items-start gap-3 sm:gap-4 p-5 sm:p-6 rounded-2xl border border-foreground/10 hover:border-foreground/25 hover:bg-foreground/[0.02] transition-all duration-300 cursor-default lg:max-w-[calc(50%-3rem)] w-full">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-foreground/5 flex items-center justify-center shrink-0 group-hover:bg-foreground/10 transition-colors">
+                      <Icon className="w-4 h-4 text-foreground" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-mono text-[10px] sm:text-xs text-muted-foreground">
+                          Stage {stage.number}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-base sm:text-lg text-foreground mb-1">{stage.title}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{stage.desc}</p>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
-  );
-}
-
-function StageCard({ stage, Icon }: { stage: (typeof stages)[0]; Icon: React.ElementType }) {
-  return (
-    <div className="group flex items-start gap-4 p-6 rounded-2xl border border-foreground/10 hover:border-foreground/25 hover:bg-foreground/[0.02] transition-all duration-300 cursor-default">
-      <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center shrink-0 group-hover:bg-foreground/10 transition-colors">
-        <Icon className="w-4 h-4 text-foreground" />
-      </div>
-      <div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-mono text-xs text-muted-foreground">Stage {stage.number}</span>
-        </div>
-        <h3 className="font-display text-lg text-foreground mb-1">{stage.title}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{stage.desc}</p>
-      </div>
-    </div>
   );
 }
