@@ -4,32 +4,29 @@ import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 
 const footerLinks = {
-  Product: [
-    { name: "Features", href: "#features" },
-    { name: "How it works", href: "#how-it-works" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Integrations", href: "#integrations" },
+  Services: [
+    { name: "Web Development", href: "/services" },
+    { name: "Shopify Stores", href: "/services" },
+    { name: "WordPress CMS", href: "/services" },
+    { name: "AI Integrations", href: "/services" },
   ],
-  Developers: [
-    { name: "Documentation", href: "#developers" },
-    { name: "API Reference", href: "#" },
-    { name: "SDK", href: "#developers" },
-    { name: "Status", href: "#" },
+  Resources: [
+    { name: "Our Work", href: "/#work" },
+    { name: "Blog", href: "/blog" },
+    { name: "Documentation", href: "#" },
+    { name: "Design System", href: "#" },
   ],
   Company: [
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
+    { name: "About Us", href: "/about" },
     { name: "Careers", href: "#", badge: "Hiring" },
-    { name: "Contact", href: "#" },
+    { name: "Contact", href: "/contact" },
+    { name: "Onboarding", href: "/onboarding" },
   ],
   Legal: [
     { name: "Privacy", href: "/privacy" },
     { name: "Terms", href: "/terms" },
     { name: "Cookies", href: "/cookies" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "GDPR & CCPA", href: "/gdpr-ccpa" },
-    { name: "Refund Policy", href: "/refund-policy" },
-    { name: "Security", href: "#security" },
+    { name: "Security", href: "/security" },
   ],
 };
 
@@ -58,8 +55,8 @@ export function FooterSection() {
               </a>
 
               <p className="text-muted-foreground leading-relaxed mb-6 max-w-xs">
-                The platform for teams who ship. Build, deploy, and scale with
-                unprecedented velocity.
+                Premium web design and development agency crafting
+                high-performance digital experiences for ambitious brands.
               </p>
 
               {/* Social Links */}
@@ -106,7 +103,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            2025 Floxia Studio. All rights reserved.
+            &copy; 2026 Floxia Studio. All rights reserved.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
