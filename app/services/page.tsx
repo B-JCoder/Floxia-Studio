@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/landing/hero-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { ServicesListSection } from "@/components/services/services-list-section";
 import { CTASection } from "@/components/landing/cta-section";
+import { BlogSection } from "@/components/landing/blog-section";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -55,9 +56,6 @@ export default function ServicesPage() {
       {/* Services-specific sections */}
       <ServicesListSection />
       <CTASection
-        eyebrow="Ready to Get Started?"
-        title="Let's Build Your Digital Presence"
-        description="Tell us about your project and we'll recommend the exact combination of services that will drive your business forward. Free consultation, no obligations."
         showStats={true}
         stats={[
           { value: "10+", label: "Core Services" },
@@ -67,6 +65,7 @@ export default function ServicesPage() {
         ]}
       />
 
+      <BlogSection />
       <FooterSection />
     </main>
   );

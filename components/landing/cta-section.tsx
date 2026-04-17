@@ -6,8 +6,8 @@ import Link from "next/link";
 
 interface CTASectionProps {
   eyebrow?: string;
-  title: string;
-  description: string | React.ReactNode;
+  title?: string;
+  description?: string | React.ReactNode;
   primaryCta?: {
     label: string;
     href: string;
@@ -26,8 +26,8 @@ interface CTASectionProps {
 
 export function CTASection({
   eyebrow = "Ready to Get Started?",
-  title,
-  description,
+  title = "Let's Build Something Together",
+  description = "Whether you're launching your first business website, scaling an e-commerce operation, or rebuilding a digital platform that no longer serves your growth Floxia Studio is ready to be your partner.",
   primaryCta = {
     label: "Schedule a Free Discovery Call",
     href: "https://calendly.com/aithinkagents/30min",
@@ -107,31 +107,32 @@ export function CTASection({
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-foreground/10 blur-[100px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary-foreground/5 blur-[100px] rounded-full -translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
-          <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            {/* Left */}
-            <div>
+          <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
+            {/* Header Content */}
+            <div className="flex flex-col items-center">
               {eyebrow && (
-                <div className="flex items-center gap-3 text-sm font-mono text-primary-foreground/50 mb-4">
+                <div className="flex items-center gap-3 text-sm font-mono text-primary-foreground/50 mb-6">
                   <span className="w-8 h-px bg-primary-foreground/30" />
                   {eyebrow}
+                  <span className="w-8 h-px bg-primary-foreground/30" />
                 </div>
               )}
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1] mb-4 tracking-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 tracking-tight">
                 {title}
               </h2>
-              <div className="text-base sm:text-lg text-primary-foreground/70 leading-relaxed max-w-xl">
+              <div className="text-lg sm:text-xl text-primary-foreground/70 leading-relaxed max-w-2xl mb-12">
                 {typeof description === "string" ? <p>{description}</p> : description}
               </div>
             </div>
 
-            {/* Right — CTAs */}
-            <div className="flex flex-col gap-4 lg:items-end">
+            {/* CTAs — Centered Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
               {primaryCta && (
                 <Link
                   href={primaryCta.href}
                   target={primaryCta.external ? "_blank" : undefined}
                   rel={primaryCta.external ? "noopener noreferrer" : undefined}
-                  className="inline-flex items-center justify-center gap-3 bg-primary-foreground text-foreground px-8 py-4 rounded-full text-sm font-medium hover:bg-primary-foreground/90 transition-all group w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-3 bg-primary-foreground text-foreground px-10 py-4 rounded-full text-sm font-semibold hover:bg-primary-foreground/90 transition-all group w-full sm:w-auto min-w-[240px]"
                 >
                   {primaryCta.label}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -140,7 +141,7 @@ export function CTASection({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="inline-flex items-center justify-center gap-3 border border-primary-foreground/20 text-primary-foreground px-8 py-4 rounded-full text-sm font-medium hover:border-primary-foreground/50 hover:bg-primary-foreground/5 transition-all group w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-3 border border-primary-foreground/20 text-primary-foreground px-10 py-4 rounded-full text-sm font-semibold hover:border-primary-foreground/50 hover:bg-primary-foreground/5 transition-all group w-full sm:w-auto min-w-[200px]"
                 >
                   {secondaryCta.label}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

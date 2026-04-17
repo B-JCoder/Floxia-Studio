@@ -6,6 +6,7 @@ import { AboutMissionSection } from "@/components/about/about-mission-section";
 import { AboutExpertiseSection } from "@/components/about/about-expertise-section";
 import { AboutProcessSection } from "@/components/about/about-process-section";
 import { CTASection } from "@/components/landing/cta-section";
+import { BlogSection } from "@/components/landing/blog-section";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -61,12 +62,9 @@ export default function AboutPage() {
       <AboutMissionSection />
       <AboutExpertiseSection />
       <AboutProcessSection />
-      <CTASection
-        eyebrow="Ready to Start?"
-        title="Let's Build Something Together"
-        description="Whether you're launching your first business website, scaling an e-commerce operation, or rebuilding a digital platform that no longer serves your growth Floxia Studio is ready to be your partner."
-      />
+      <CTASection />
 
+      <BlogSection />
       <FooterSection />
     </main>
   );

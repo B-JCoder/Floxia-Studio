@@ -31,7 +31,7 @@ export interface WPPost {
 export async function getPosts(limit = 10): Promise<WPPost[]> {
   try {
     const res = await fetch(`${WP_URL}/posts?_embed&per_page=${limit}`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 60 }, // Cache for 60 seconds
     });
 
     if (!res.ok) {
@@ -49,7 +49,7 @@ export async function getPosts(limit = 10): Promise<WPPost[]> {
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
   try {
     const res = await fetch(`${WP_URL}/posts?slug=${slug}&_embed`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -68,7 +68,7 @@ export async function getPostBySlug(slug: string): Promise<WPPost | null> {
 export async function getCategories() {
   try {
     const res = await fetch(`${WP_URL}/categories`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {

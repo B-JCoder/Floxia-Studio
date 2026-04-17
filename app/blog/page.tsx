@@ -1,108 +1,159 @@
 import { Navigation } from "@/components/landing/navigation";
 import { FooterSection } from "@/components/landing/footer-section";
-import { getPosts } from "@/lib/wordpress";
+import { getPosts, getCategories } from "@/lib/wordpress";
 import { format } from "date-fns";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, User, Clock, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Floxia Studio",
-  description: "Read the latest insights and updates from Floxia Studio about web development, AI, and design.",
+  title: "Blog & Insights | Floxia Studio",
+  description: "Explore the latest trends in web design, AI automation, and digital strategy from the experts at Floxia Studio.",
 };
 
 export default async function BlogPage() {
-  const posts = await getPosts(12);
+  const [posts, categories] = await Promise.all([
+    getPosts(100), // Fetch a good number for the main list
+    getCategories()
+  ]);
+
+  const featuredPost = posts[0];
+  const regularPosts = posts.slice(1);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden noise-overlay">
+    <main className="relative min-h-screen overflow-x-hidden noise-overlay bg-background">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6 lg:px-12 border-b border-foreground/5 bg-background">
-        <div className="max-w-[1400px] mx-auto text-center">
-          <span className="inline-block py-1 px-3 rounded-full bg-foreground/5 text-xs font-medium mb-4 uppercase tracking-wider">
-            Our Insights
-          </span>
-          <h1 className="text-5xl md:text-7xl font-display mb-6 tracking-tight">
-            The <span className="text-stroke">Latest</span> Stories
-          </h1>
-          <p className="max-w-2xl mx-auto text-muted-foreground text-lg leading-relaxed">
-            Exploring the intersection of technology, design, and digital strategy. 
-            Stay updated with our latest findings and agency updates.
-          </p>
-        </div>
-      </section>
+      <section className="pt-32 pb-20 px-6 lg:px-12 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-foreground/[0.02] rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-foreground/[0.01] rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
-      {/* Blog Grid */}
-      <section className="py-20 px-6 lg:px-12">
-        <div className="max-w-[1400px] mx-auto">
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <article 
-                  key={post.id} 
-                  className="group flex flex-col bg-card border border-foreground/10 rounded-2xl overflow-hidden hover-lift"
-                >
-                  <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden">
-                    {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ? (
-                      <img
-                        src={post._embedded["wp:featuredmedia"][0].source_url}
-                        alt={post.title.rendered}
-                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">
-                        No image
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white text-black rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                        <ArrowRight className="w-6 h-6" />
-                      </div>
-                    </div>
-                  </Link>
-
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {format(new Date(post.date), "MMM d, yyyy")}
-                      </span>
-                      {post._embedded?.["wp:term"]?.[0]?.[0] && (
-                        <span className="bg-foreground/5 py-0.5 px-2 rounded-full uppercase tracking-widest font-semibold">
-                          {post._embedded["wp:term"][0][0].name}
-                        </span>
-                      )}
-                    </div>
-
-                    <Link href={`/blog/${post.slug}`}>
-                      <h2 
-                        className="text-2xl font-display mb-3 group-hover:text-foreground/80 transition-colors line-clamp-2"
-                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                      />
-                    </Link>
-
-                    <div 
-                      className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-1 mb-8"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                    />
-
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest mt-auto group/btn"
-                    >
-                      Read Article
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Link>
-                  </div>
-                </article>
-              ))}
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <div className="max-w-3xl mb-16">
+            <div className="flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
+              <span className="w-8 h-px bg-foreground/20" />
+              Insights & Updates
             </div>
-          ) : (
-            <div className="text-center py-20">
-              <h3 className="text-2xl font-display mb-4">No posts found</h3>
-              <p className="text-muted-foreground">Check back later for fresh content.</p>
+            <h1 className="text-5xl md:text-8xl font-display tracking-tight leading-[0.9] mb-8">
+              The Digital <br />
+              <span className="text-stroke">Knowledge</span> Base
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-xl">
+              Deep dives into the technology, design, and strategy that 
+              drives the most ambitious brands in the digital era.
+            </p>
+          </div>
+
+          {/* Featured Post */}
+          {featuredPost && (
+            <div className="mb-24">
+              <Link 
+                href={`/blog/${featuredPost.slug}`}
+                className="group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+              >
+                <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-foreground/10">
+                  {featuredPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ? (
+                    <img
+                      src={featuredPost._embedded["wp:featuredmedia"][0].source_url}
+                      alt={featuredPost.title.rendered}
+                      className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-foreground/5 flex items-center justify-center font-display text-4xl opacity-10">FS</div>
+                  )}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground mb-6 uppercase tracking-[0.2em]">
+                    <span className="bg-foreground text-background px-3 py-1 rounded-full font-bold">Featured</span>
+                    <span>{format(new Date(featuredPost.date), "MMMM d, yyyy")}</span>
+                  </div>
+                  <h2 
+                    className="text-3xl md:text-5xl font-display mb-6 group-hover:text-muted-foreground transition-colors leading-[1.1]"
+                    dangerouslySetInnerHTML={{ __html: featuredPost.title.rendered }}
+                  />
+                  <div 
+                    className="text-lg text-muted-foreground mb-10 line-clamp-3 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: featuredPost.excerpt.rendered }}
+                  />
+                  <div className="flex items-center gap-2 font-semibold uppercase tracking-widest group-hover:gap-4 transition-all">
+                    Read Featured Article
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          )}
+
+          {/* Categories / Filter Placeholder */}
+          <div className="flex flex-wrap gap-3 mb-16 pb-8 border-b border-foreground/5">
+            <span className="px-6 py-2 rounded-full bg-foreground text-background text-sm font-semibold">All Posts</span>
+            {categories.map((cat: any) => (
+              <span 
+                key={cat.id}
+                className="px-6 py-2 rounded-full bg-foreground/5 border border-foreground/10 text-sm font-medium hover:bg-foreground/10 transition-colors cursor-pointer"
+              >
+                {cat.name}
+              </span>
+            ))}
+          </div>
+
+          {/* Regular Posts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+            {regularPosts.map((post) => (
+              <Link 
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="group flex flex-col"
+              >
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-8 border border-foreground/5 bg-foreground/5">
+                  {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ? (
+                    <img
+                      src={post._embedded["wp:featuredmedia"][0].source_url}
+                      alt={post.title.rendered}
+                      className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center font-display text-2xl opacity-10">FS</div>
+                  )}
+                  <div className="absolute top-6 right-6 translate-x-4 translate-y-4 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="bg-white text-black p-4 rounded-full shadow-2xl">
+                      <ArrowUpRight className="w-5 h-5" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground mb-4 uppercase tracking-widest">
+                    <span>{format(new Date(post.date), "MMM d, yyyy")}</span>
+                    {post._embedded?.["wp:term"]?.[0]?.[0] && (
+                      <span className="text-foreground/40">{post._embedded["wp:term"][0][0].name}</span>
+                    )}
+                  </div>
+                  <h3 
+                    className="text-2xl font-display mb-4 leading-tight group-hover:text-muted-foreground transition-colors line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                  />
+                  <div 
+                    className="text-muted-foreground text-sm line-clamp-3 leading-relaxed mb-8"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                  />
+                  <div className="mt-auto flex items-center gap-2 text-sm font-bold uppercase tracking-widest group-hover:text-muted-foreground transition-colors">
+                    View Article
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {regularPosts.length === 0 && !featuredPost && (
+            <div className="py-24 text-center">
+              <h2 className="text-3xl font-display mb-4">No insights yet.</h2>
+              <p className="text-muted-foreground">We're busy crafting some amazing stories. Check back soon.</p>
             </div>
           )}
         </div>
