@@ -9,7 +9,7 @@ import { SecuritySection } from "@/components/landing/security-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { PricingSection } from "@/components/landing/pricing-section";
-// import { CtaSection } from "@/components/landing/cta-section";
+import { CTASection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { WhoWeAreSection } from "@/components/landing/who-we-are-section";
@@ -72,8 +72,19 @@ export default function Home() {
       <TestimonialsSection />
       <PricingSection />
 
-      {/* <CtaSection /> */}
-      <SocialProofSection />
+      <CTASection
+        title="Ready to build something great?"
+        description="Join thousands of teams shipping faster with Floxia Studio. Start your project today and scale infinitely."
+        primaryCta={{
+          label: "Start Your Project",
+          href: "/onboarding",
+        }}
+        secondaryCta={{
+          label: "Talk to Sales",
+          href: "/contact",
+        }}
+      />
+
       <FooterSection />
     </main>
   );
