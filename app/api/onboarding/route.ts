@@ -80,12 +80,13 @@ export async function POST(request: Request) {
 
     // 1. Save to Supabase
     const { error: dbError } = await supabase
-      .from('onboarding_submissions')
+      .from('onboarding_clients')
       .insert([{ 
-        full_name: fullName, 
-        business_name: businessName, 
-        email: email, 
-        form_data: formData 
+        company_name: businessName, 
+        industry: formData.f_industry || '',
+        current_revenue: formData.f_budget || '',
+        target_goals: formData.f_goals || '',
+        amazon_store_link: formData.f_website || ''
       }]);
 
     if (dbError) {

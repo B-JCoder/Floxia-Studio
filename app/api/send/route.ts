@@ -11,10 +11,19 @@ export async function POST(request: Request) {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    // 1. Save to Supabase
+    // 1. Save to Supabase (Leads Table)
+    const firstName = name.split(' ')[0];
+    const lastName = name.split(' ').slice(1).join(' ');
+
     const { error: dbError } = await supabase
-      .from('inquiries')
-      .insert([{ name, email, subject, message }]);
+      .from('leads')
+      .insert([{ 
+        first_name: firstName || 'Unknown', 
+        last_name: lastName || '', 
+        email, 
+        service: subject, 
+        message 
+      }]);
 
     if (dbError) {
       console.error("Database error:", dbError);

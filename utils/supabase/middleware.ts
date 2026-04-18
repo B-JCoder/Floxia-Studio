@@ -4,8 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export const createClient = (request: NextRequest) => {
-  // Create an unmodified response
+export const createClient = async (request: NextRequest) => {
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -33,5 +32,29 @@ export const createClient = (request: NextRequest) => {
     },
   );
 
-  return supabaseResponse
+  // IMPORTANT: Avoid writing any logic between createServerClient and
+  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // issues with users being randomly logged out.
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Protect admin routes
+  const isAuthRoute = request.nextUrl.pathname.startsWith('/admin/auth');
+  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin') && !isAuthRoute;
+
+  if (isAdminRoute && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/admin/auth';
+    return NextResponse.redirect(url);
+  }
+
+  if (isAuthRoute && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/admin/dashboard';
+    return NextResponse.redirect(url);
+  }
+
+  return supabaseResponse;
 };
