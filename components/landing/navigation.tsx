@@ -81,14 +81,14 @@ export function Navigation() {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
-              {/* <Link
-                href="/#work"
+              <Link
+                href="/work"
                 className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${
                   isScrolled ? "text-xs" : "text-sm"
                 }`}
               >
                 See Our Work
-              </Link> */}
+              </Link>
               <Link href="/onboarding">
                 <Button
                   size="sm"
@@ -156,14 +156,14 @@ export function Navigation() {
             }`}
             style={{ transitionDelay: isMobileMenuOpen ? "280ms" : "0ms" }}
           >
-            {/* <Link href="/#work" onClick={close} className="w-full">
+            <Link href="/work" onClick={close} className="w-full">
               <Button
                 variant="outline"
                 className="w-full rounded-full h-12 sm:h-13 text-sm sm:text-base border-foreground/20 hover:bg-foreground/5"
               >
                 See Our Work
               </Button>
-            </Link> */}
+            </Link>
             <Link href="/onboarding" className="w-full" onClick={close}>
               <Button className="w-full bg-foreground text-background rounded-full h-12 sm:h-13 text-sm sm:text-base hover:bg-foreground/90">
                 Start Your Project

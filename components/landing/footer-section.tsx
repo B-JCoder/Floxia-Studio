@@ -50,7 +50,6 @@ export function FooterSection() {
                 Premium web design and development agency crafting
                 high-performance digital experiences for ambitious brands.
               </p>
-
             </div>
 
             {/* Link Columns */}

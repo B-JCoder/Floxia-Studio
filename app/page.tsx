@@ -48,7 +48,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Floxia Studio | Custom Web Design & Development",
-    description: "High-performance websites and AI digital systems for ambitious brands.",
+    description:
+      "High-performance websites and AI digital systems for ambitious brands.",
     creator: "@floxiastudio",
   },
 };
@@ -63,7 +64,7 @@ export default function Home() {
         headingLine2="What Businesses Need"
         description="We are Floxia Studio a full-service web design and development agency based in the USA, crafting high-performance websites, e-commerce stores, and AI-integrated digital systems for ambitious brands worldwide."
         primaryCta={{ label: "Start Your Project", href: "/onboarding" }}
-        secondaryCta={{ label: "See Our Work", href: "#work" }}
+        secondaryCta={{ label: "See Our Work", href: "/work" }}
       />
       <StatsMarquee />
       <WhoWeAreSection />

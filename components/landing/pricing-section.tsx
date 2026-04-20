@@ -133,7 +133,7 @@ export function PricingSection() {
               <div
                 key={plan.id}
                 className={`
-                  relative flex flex-col rounded-2xl border transition-all duration-300 hover-lift overflow-hidden
+                  relative flex flex-col rounded-2xl border transition-all duration-300 hover-lift
                   ${plan.popular
                     ? "border-foreground shadow-2xl shadow-foreground/10 md:-mt-4 md:-mb-4"
                     : "border-foreground/15 hover:border-foreground/40"
@@ -141,13 +141,13 @@ export function PricingSection() {
                 `}
               >
                 {/* Card gradient top accent */}
-                <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${plan.accentColor} pointer-events-none`} />
+                <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${plan.accentColor} pointer-events-none rounded-t-2xl`} />
 
                 {/* Popular badge */}
                 {plan.popular && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 bg-foreground text-primary-foreground text-xs font-mono uppercase tracking-widest rounded-full">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 bg-foreground text-primary-foreground text-[10px] font-bold uppercase tracking-[0.2em] rounded-full shadow-xl z-20 whitespace-nowrap border border-foreground/10">
                     <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse" />
-                    Most Popular
+                    MOST POPULAR
                   </div>
                 )}
 
