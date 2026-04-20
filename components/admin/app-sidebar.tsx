@@ -38,35 +38,40 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard Overview",
+      title: "Dashboard",
       url: "/admin/dashboard",
       icon: IconDashboard,
     },
     {
-      title: "Leads Pipeline",
-      url: "#",
+      title: "Leads",
+      url: "/admin/leads",
       icon: IconUsers,
     },
     {
-      title: "Active Projects",
-      url: "#",
+      title: "Projects",
+      url: "/admin/projects",
       icon: IconFolder,
     },
     {
-      title: "Task Management",
-      url: "#",
-      icon: IconListDetails,
+      title: "Proposals",
+      url: "/admin/proposals",
+      icon: IconWriting,
     },
     {
-      title: "Analytics & Goals",
-      url: "#",
+      title: "Invoices",
+      url: "/admin/invoices",
+      icon: IconFileInvoice,
+    },
+    {
+      title: "Analytics",
+      url: "/admin/analytics",
       icon: IconChartBar,
     },
   ],
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/admin/settings",
       icon: IconSettings,
     },
     {
@@ -88,7 +93,7 @@ const data = {
     },
     {
       name: "Invoices",
-      url: "#",
+      url: "/admin/invoices",
       icon: IconFileInvoice,
     },
     {

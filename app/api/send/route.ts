@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     if (dbError) {
       console.error("Database error:", dbError);
-      // We continue to send the email even if DB fails, or we could return error
+      return NextResponse.json({ error: `Database error: ${dbError.message}` }, { status: 500 });
     }
 
     // 2. Send Email via Resend

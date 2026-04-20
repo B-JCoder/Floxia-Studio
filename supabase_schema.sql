@@ -113,5 +113,92 @@ CREATE TABLE IF NOT EXISTS documents (
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Enable all for authenticated users" ON documents FOR ALL USING (auth.role() = 'authenticated');
 
--- Note: You also need to create a Storage Bucket named 'documents' in the Supabase Dashboard.
--- Set the bucket to "Public" if you want to share links easily, or keep it private and use signed URLs.
+-- 8. Proposals
+CREATE TABLE IF NOT EXISTS proposals (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    lead_id UUID REFERENCES leads(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    content JSONB, -- Stores the structure of the proposal
+    total_amount NUMERIC,
+    status TEXT NOT NULL DEFAULT 'Draft' CHECK (status IN ('Draft', 'Sent', 'Accepted', 'Rejected')),
+    valid_until DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE proposals ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON proposals FOR ALL USING (auth.role() = 'authenticated');
+
+-- 9. Invoices
+CREATE TABLE IF NOT EXISTS invoices (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    project_id UUID REFERENCES projects(id) ON DELETE SET NULL,
+    client_id UUID REFERENCES onboarding_clients(id) ON DELETE CASCADE,
+    invoice_number TEXT UNIQUE NOT NULL,
+    amount_due NUMERIC NOT NULL,
+    amount_paid NUMERIC DEFAULT 0,
+    status TEXT NOT NULL DEFAULT 'Unpaid' CHECK (status IN ('Unpaid', 'Partially Paid', 'Paid', 'Overdue', 'Cancelled')),
+    due_date DATE NOT NULL,
+    paid_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON invoices FOR ALL USING (auth.role() = 'authenticated');
+
+-- 10. Milestones
+CREATE TABLE IF NOT EXISTS milestones (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    description TEXT,
+    due_date DATE,
+    status TEXT NOT NULL DEFAULT 'Pending' CHECK (status IN ('Pending', 'In Progress', 'Completed')),
+    order_index INTEGER DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE milestones ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON milestones FOR ALL USING (auth.role() = 'authenticated');
+
+-- 11. Time Logs
+CREATE TABLE IF NOT EXISTS time_logs (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+    task_id UUID REFERENCES tasks(id) ON DELETE SET NULL,
+    user_id UUID REFERENCES admin_users(id) ON DELETE SET NULL,
+    description TEXT,
+    hours NUMERIC NOT NULL,
+    date DATE DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE time_logs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON time_logs FOR ALL USING (auth.role() = 'authenticated');
+
+-- 12. Communications
+CREATE TABLE IF NOT EXISTS communications (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    lead_id UUID REFERENCES leads(id) ON DELETE CASCADE,
+    client_id UUID REFERENCES onboarding_clients(id) ON DELETE CASCADE,
+    type TEXT NOT NULL CHECK (type IN ('Email', 'Call', 'Meeting', 'Note')),
+    subject TEXT,
+    content TEXT,
+    sent_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE communications ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON communications FOR ALL USING (auth.role() = 'authenticated');
+
+-- 13. Agency Settings
+CREATE TABLE IF NOT EXISTS agency_settings (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    key TEXT UNIQUE NOT NULL,
+    value JSONB,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE agency_settings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all for authenticated users" ON agency_settings FOR ALL USING (auth.role() = 'authenticated');

@@ -1,24 +1,23 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 
-const footerLinks = {
+type FooterLink = {
+  name: string;
+  href: string;
+  badge?: string;
+};
+
+const footerLinks: Record<string, FooterLink[]> = {
   Services: [
     { name: "Web Development", href: "/services" },
     { name: "Shopify Stores", href: "/services" },
     { name: "WordPress CMS", href: "/services" },
-    { name: "AI Integrations", href: "/services" },
   ],
-  Resources: [
-    { name: "Our Work", href: "/#work" },
-    { name: "Blog", href: "/blog" },
-    { name: "Documentation", href: "#" },
-    { name: "Design System", href: "#" },
-  ],
+
   Company: [
     { name: "About Us", href: "/about" },
-    { name: "Careers", href: "#", badge: "Hiring" },
+
     { name: "Contact", href: "/contact" },
     { name: "Onboarding", href: "/onboarding" },
   ],
@@ -26,15 +25,8 @@ const footerLinks = {
     { name: "Privacy", href: "/privacy" },
     { name: "Terms", href: "/terms" },
     { name: "Cookies", href: "/cookies" },
-    { name: "Security", href: "/security" },
   ],
 };
-
-const socialLinks = [
-  { name: "Twitter", href: "#" },
-  { name: "GitHub", href: "#" },
-  { name: "LinkedIn", href: "#" },
-];
 
 export function FooterSection() {
   return (
@@ -59,19 +51,6 @@ export function FooterSection() {
                 high-performance digital experiences for ambitious brands.
               </p>
 
-              {/* Social Links */}
-              <div className="flex gap-6">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 group"
-                  >
-                    {link.name}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Link Columns */}
@@ -86,7 +65,7 @@ export function FooterSection() {
                         className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
                       >
                         {link.name}
-                        {"badge" in link && link.badge && (
+                        {link.badge && (
                           <span className="text-xs px-2 py-0.5 bg-foreground text-background rounded-full">
                             {link.badge}
                           </span>

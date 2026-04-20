@@ -1,7 +1,7 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
-import { createClient } from '@/utils/supabase/server';
-import { cookies } from 'next/headers';
+import { Resend } from "resend";
+import { NextResponse } from "next/server";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,7 +18,7 @@ const SECTIONS = [
       f_website: "Existing Website",
       f_desc: "Business Description",
       f_audience: "Target Audience",
-    }
+    },
   },
   {
     title: "Project Goals & Requirements",
@@ -29,7 +29,7 @@ const SECTIONS = [
       f_integrations: "Features & Integrations",
       f_launch: "Launch Timeline",
       f_budget: "Project Budget",
-    }
+    },
   },
   {
     title: "Branding & Visual Identity",
@@ -40,7 +40,7 @@ const SECTIONS = [
       f_fonts: "Typography Preference",
       f_inspo: "Design Inspiration",
       f_avoid: "Things to Avoid",
-    }
+    },
   },
   {
     title: "Content & Strategy",
@@ -52,7 +52,7 @@ const SECTIONS = [
       f_seo: "SEO Strategy",
       f_languages: "Languages",
       f_addcontent: "Additional Content Info",
-    }
+    },
   },
   {
     title: "Technical & Final Details",
@@ -64,8 +64,8 @@ const SECTIONS = [
       f_competitors: "Top Competitors",
       f_anything: "Additional Project Info",
       f_hear: "Referral Source",
-    }
-  }
+    },
+  },
 ];
 
 export async function POST(request: Request) {
@@ -78,28 +78,51 @@ export async function POST(request: Request) {
     const businessName = formData.f_bname || "Unknown Business";
     const email = formData.f_email || "Unknown Email";
 
-    // 1. Save to Supabase
+    // 1. Save to Supabase (onboarding_clients)
     const { error: dbError } = await supabase
-      .from('onboarding_clients')
-      .insert([{ 
-        company_name: businessName, 
-        industry: formData.f_industry || '',
-        current_revenue: formData.f_budget || '',
-        target_goals: formData.f_goals || '',
-        amazon_store_link: formData.f_website || ''
-      }]);
+      .from("onboarding_clients")
+      .insert([
+        {
+          company_name: businessName,
+          industry: formData.f_industry || "",
+          current_revenue: formData.f_budget || "",
+          target_goals: formData.f_goals || "",
+          amazon_store_link: formData.f_website || "",
+        },
+      ]);
 
     if (dbError) {
       console.error("Database error (Onboarding):", dbError);
+      return NextResponse.json(
+        { error: `Database error: ${dbError.message}` },
+        { status: 500 },
+      );
     }
 
-    // 2. Generate Structured Email Content
-    let emailHtml = SECTIONS.map(section => {
-      const sectionRows = Object.entries(section.fields).map(([key, label]) => {
-        const rawValue = formData[key];
-        const displayValue = Array.isArray(rawValue) ? rawValue.join(", ") : rawValue;
-        
-        return `
+    // 1.5 Save to Supabase (leads) so it shows up in dashboard
+    const { error: leadDbError } = await supabase.from("leads").insert([
+      {
+        first_name: fullName.split(" ")[0] || "Unknown",
+        last_name: fullName.split(" ").slice(1).join(" ") || "",
+        email: email,
+        service: formData.f_industry || "Onboarding",
+        budget: formData.f_budget || "",
+        status: "New",
+      },
+    ]);
+
+    if (leadDbError) {
+      console.error("Database error (Leads):", leadDbError);
+    }
+    let emailHtml = SECTIONS.map((section) => {
+      const sectionRows = Object.entries(section.fields)
+        .map(([key, label]) => {
+          const rawValue = formData[key];
+          const displayValue = Array.isArray(rawValue)
+            ? rawValue.join(", ")
+            : rawValue;
+
+          return `
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #eee; width: 200px; vertical-align: top;">
               <span style="color: #666; font-size: 12px; font-weight: 600; text-transform: uppercase;">${label}</span>
@@ -109,7 +132,8 @@ export async function POST(request: Request) {
             </td>
           </tr>
         `;
-      }).join("");
+        })
+        .join("");
 
       return `
         <div style="margin-bottom: 30px;">
@@ -123,8 +147,8 @@ export async function POST(request: Request) {
 
     // 3. Send Comprehensive Email via Resend
     const { data, error: emailError } = await resend.emails.send({
-      from: 'Floxia Studio <onboarding@resend.dev>',
-      to: 'floxiastudio@gmail.com',
+      from: "Floxia Studio <onboarding@resend.dev>",
+      to: "floxiastudio@gmail.com",
       subject: `🚀 New Project Inquiry: ${businessName} (${fullName})`,
       html: `
         <!DOCTYPE html>
@@ -177,6 +201,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("Server error:", error);
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

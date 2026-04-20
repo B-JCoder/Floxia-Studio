@@ -78,11 +78,11 @@ export type Lead = {
 
 export type Project = {
   id: string;
-  lead_id: string;
-  name: string;
+  client_id: string;
+  title: string;
   status: string;
   budget: string;
-  deadline: string;
+  end_date: string;
   created_at: string;
 };
 
@@ -92,8 +92,7 @@ export type Task = {
   title: string;
   description: string;
   status: string;
-  priority: string;
-  due_date: string;
+  deadline: string;
 };
 
 // --- Generic Table Component ---
@@ -458,9 +457,9 @@ const leadColumns: ColumnDef<Lead>[] = [
 
 const projectColumns: ColumnDef<Project>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "title",
     header: "Project Name",
-    cell: ({ row }) => <div className="font-medium">{row.original.name}</div>,
+    cell: ({ row }) => <div className="font-medium">{row.original.title}</div>,
   },
   {
     accessorKey: "budget",
@@ -492,9 +491,9 @@ const projectColumns: ColumnDef<Project>[] = [
     },
   },
   {
-    accessorKey: "deadline",
+    accessorKey: "end_date",
     header: "Deadline",
-    cell: ({ row }) => <div className="text-muted-foreground text-sm">{row.original.deadline ? new Date(row.original.deadline).toLocaleDateString() : 'None'}</div>,
+    cell: ({ row }) => <div className="text-muted-foreground text-sm">{row.original.end_date ? new Date(row.original.end_date).toLocaleDateString() : 'None'}</div>,
   },
   {
     id: "actions",
@@ -520,11 +519,6 @@ const taskColumns: ColumnDef<Task>[] = [
     cell: ({ row }) => <div className="font-medium">{row.original.title}</div>,
   },
   {
-    accessorKey: "priority",
-    header: "Priority",
-    cell: ({ row }) => <Badge variant={row.original.priority === "High" ? "destructive" : "secondary"}>{row.original.priority}</Badge>,
-  },
-  {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
@@ -539,27 +533,38 @@ const taskColumns: ColumnDef<Task>[] = [
         <Select defaultValue={row.original.status} onValueChange={handleStatusChange}>
           <SelectTrigger className="w-[130px] h-8 text-xs"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="Pending">Pending</SelectItem>
+            <SelectItem value="Todo">Todo</SelectItem>
             <SelectItem value="In Progress">In Progress</SelectItem>
-            <SelectItem value="Review">Review</SelectItem>
-            <SelectItem value="Completed">Completed</SelectItem>
+            <SelectItem value="In Review">In Review</SelectItem>
+            <SelectItem value="Done">Done</SelectItem>
           </SelectContent>
         </Select>
       );
     },
   },
   {
-    accessorKey: "due_date",
-    header: "Due Date",
-    cell: ({ row }) => <div className="text-muted-foreground text-sm">{row.original.due_date ? new Date(row.original.due_date).toLocaleDateString() : 'No date'}</div>,
+    accessorKey: "deadline",
+    header: "Deadline",
+    cell: ({ row }) => <div className="text-muted-foreground text-sm">{row.original.deadline ? new Date(row.original.deadline).toLocaleDateString() : 'No date'}</div>,
   },
 ];
 
 // --- Main Export ---
 
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+
 export function DataTable({ leads, projects, tasks }: { leads?: Lead[], projects?: Project[], tasks?: Task[] }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const activeTab = searchParams.get('tab') || 'leads';
+
+  const onTabChange = (value: string) => {
+    router.push(`${pathname}?tab=${value}`);
+  }
+
   return (
-    <Tabs defaultValue="leads" className="w-full flex-col justify-start gap-6 px-4 lg:px-6">
+    <Tabs value={activeTab} onValueChange={onTabChange} className="w-full flex-col justify-start gap-6 px-4 lg:px-6">
       <TabsList className="hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:px-1 @4xl/main:flex mb-4">
         <TabsTrigger value="leads">
           Leads <Badge variant="secondary">{leads?.length || 0}</Badge>
@@ -588,7 +593,7 @@ export function DataTable({ leads, projects, tasks }: { leads?: Lead[], projects
         <GenericTable 
           data={projects || []} 
           columns={projectColumns} 
-          searchKey="name" 
+          searchKey="title" 
           searchPlaceholder="Filter projects..." 
           noResultsText="No projects found."
           entityType="Project"
