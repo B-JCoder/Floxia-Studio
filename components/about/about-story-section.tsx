@@ -18,7 +18,7 @@ export function AboutStorySection() {
   }, []);
 
   const milestones = [
-    { year: "2020", label: "Founded" },
+    { year: "2026", label: "Founded" },
     { year: "10+", label: "Projects Launched" },
     { year: "12+", label: "Industries Served" },
     { year: "100%", label: "Client Retention" },
