@@ -26,13 +26,19 @@ export function Navigation() {
   // Prevent body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMobileMenuOpen]);
 
   const close = () => setIsMobileMenuOpen(false);
   const Logo = () => (
     <Link href="/" className="flex items-center gap-2 group">
-      <img src="/logo.png" alt="Floxia Studio" className="h-9 sm:h-10 w-auto transition-all duration-500" />
+      <img
+        src="/logo.png"
+        alt="Floxia Studio"
+        className="h-9 sm:h-10 w-auto transition-all duration-500"
+      />
     </Link>
   );
 
@@ -75,14 +81,14 @@ export function Navigation() {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
-              <Link
+              {/* <Link
                 href="/#work"
                 className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${
                   isScrolled ? "text-xs" : "text-sm"
                 }`}
               >
                 See Our Work
-              </Link>
+              </Link> */}
               <Link href="/onboarding">
                 <Button
                   size="sm"
@@ -120,7 +126,6 @@ export function Navigation() {
         }`}
       >
         <div className="flex flex-col h-full px-7 pt-24 sm:pt-28 pb-8 safe-area-inset">
-
           {/* Nav Links */}
           <div className="flex-1 flex flex-col justify-center gap-4 sm:gap-6">
             {navLinks.map((link, i) => (
@@ -151,21 +156,20 @@ export function Navigation() {
             }`}
             style={{ transitionDelay: isMobileMenuOpen ? "280ms" : "0ms" }}
           >
-            <Link href="/#work" onClick={close} className="w-full">
+            {/* <Link href="/#work" onClick={close} className="w-full">
               <Button
                 variant="outline"
                 className="w-full rounded-full h-12 sm:h-13 text-sm sm:text-base border-foreground/20 hover:bg-foreground/5"
               >
                 See Our Work
               </Button>
-            </Link>
+            </Link> */}
             <Link href="/onboarding" className="w-full" onClick={close}>
               <Button className="w-full bg-foreground text-background rounded-full h-12 sm:h-13 text-sm sm:text-base hover:bg-foreground/90">
                 Start Your Project
               </Button>
             </Link>
           </div>
-
         </div>
       </div>
     </>
