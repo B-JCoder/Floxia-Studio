@@ -2,6 +2,33 @@
 
 import { useEffect, useState, useRef } from "react";
 
+const metrics = [
+  {
+    value: 10,
+    suffix: "+",
+    prefix: "",
+    label: "Websites launched",
+  },
+  {
+    value: 100,
+    suffix: "%",
+    prefix: "",
+    label: "Client satisfaction rate",
+  },
+  {
+    value: 99,
+    suffix: "+",
+    prefix: "",
+    label: "Avg. PageSpeed score on every build",
+  },
+  {
+    value: 3,
+    suffix: "x",
+    prefix: "",
+    label: "Faster delivery than industry average",
+  },
+];
+
 function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,33 +70,6 @@ function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffi
     </div>
   );
 }
-
-const metrics = [
-  {
-    value: 50,
-    suffix: "+",
-    prefix: "",
-    label: "Websites launched",
-  },
-  {
-    value: 99,
-    suffix: "%",
-    prefix: "",
-    label: "Client satisfaction rate",
-  },
-  {
-    value: 95,
-    suffix: "+",
-    prefix: "",
-    label: "Avg. PageSpeed score on every build",
-  },
-  {
-    value: 3,
-    suffix: "x",
-    prefix: "",
-    label: "Faster delivery than industry average",
-  },
-];
 
 export function MetricsSection() {
   const [time, setTime] = useState(new Date());

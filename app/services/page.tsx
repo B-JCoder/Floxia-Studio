@@ -75,8 +75,8 @@ export default function ServicesPage() {
         showStats={true}
         stats={[
           { value: "10+", label: "Core Services" },
-          { value: "50+", label: "Projects Delivered" },
-          { value: "95+", label: "PageSpeed Scores" },
+          { value: "10+", label: "Projects Delivered" },
+          { value: "99+", label: "PageSpeed Scores" },
           { value: "24h", label: "Response Time" },
         ]}
       />

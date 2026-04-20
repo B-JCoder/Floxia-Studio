@@ -12,7 +12,7 @@ const securityFeatures = [
   },
   {
     icon: Zap,
-    title: "95+ PageSpeed Guaranteed",
+    title: "99+ PageSpeed Guaranteed",
     description:
       "We optimize every build for Core Web Vitals fast load times, next-gen images, and lean, minified code.",
   },

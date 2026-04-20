@@ -1,6 +1,14 @@
 "use client";
 
-import { ArrowRight, Check, Zap, TrendingUp, Rocket, RefreshCw, Plus } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Zap,
+  TrendingUp,
+  Rocket,
+  RefreshCw,
+  Plus,
+} from "lucide-react";
 
 const plans = [
   {
@@ -97,7 +105,10 @@ const addons = [
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="relative py-16 lg:py-24 border-t border-foreground/10 overflow-hidden">
+    <section
+      id="pricing"
+      className="relative py-16 lg:py-24 border-t border-foreground/10 overflow-hidden"
+    >
       {/* Subtle background grid */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
@@ -121,7 +132,8 @@ export function PricingSection() {
             <span className="text-stroke">digital presence</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Transparent, project-based pricing. No hidden fees, no surprises — just results that move your business forward.
+            Transparent, project-based pricing. No hidden fees, no surprises —
+            just results that move your business forward.
           </p>
         </div>
 
@@ -134,14 +146,17 @@ export function PricingSection() {
                 key={plan.id}
                 className={`
                   relative flex flex-col rounded-2xl border transition-all duration-300 hover-lift
-                  ${plan.popular
-                    ? "border-foreground shadow-2xl shadow-foreground/10 md:-mt-4 md:-mb-4"
-                    : "border-foreground/15 hover:border-foreground/40"
+                  ${
+                    plan.popular
+                      ? "border-foreground shadow-2xl shadow-foreground/10 md:-mt-4 md:-mb-4"
+                      : "border-foreground/15 hover:border-foreground/40"
                   }
                 `}
               >
                 {/* Card gradient top accent */}
-                <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${plan.accentColor} pointer-events-none rounded-t-2xl`} />
+                <div
+                  className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${plan.accentColor} pointer-events-none rounded-t-2xl`}
+                />
 
                 {/* Popular badge */}
                 {plan.popular && (
@@ -154,24 +169,39 @@ export function PricingSection() {
                 <div className="relative p-6 sm:p-8 flex flex-col flex-1">
                   {/* Plan label + icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs text-muted-foreground">{plan.label}</span>
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${plan.popular ? "bg-foreground text-primary-foreground" : "bg-foreground/8 text-foreground"}`}>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {plan.label}
+                    </span>
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center ${plan.popular ? "bg-foreground text-primary-foreground" : "bg-foreground/8 text-foreground"}`}
+                    >
                       <Icon className="w-4 h-4" />
                     </div>
                   </div>
 
                   {/* Name & tagline */}
                   <div className="mb-6">
-                    <h3 className="font-display text-2xl sm:text-3xl text-foreground leading-tight">{plan.name}</h3>
-                    <p className="text-muted-foreground text-sm font-mono mt-1">"{plan.tagline}"</p>
+                    <h3 className="font-display text-2xl sm:text-3xl text-foreground leading-tight">
+                      {plan.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm font-mono mt-1">
+                      "{plan.tagline}"
+                    </p>
                   </div>
 
                   {/* Price */}
                   <div className="mb-6 pb-6 border-b border-foreground/10">
-                    <p className="text-xs text-muted-foreground font-mono mb-1">{plan.priceNote}</p>
-                    <span className="font-display text-3xl sm:text-4xl text-foreground">{plan.price}</span>
+                    <p className="text-xs text-muted-foreground font-mono mb-1">
+                      {plan.priceNote}
+                    </p>
+                    <span className="font-display text-3xl sm:text-4xl text-foreground">
+                      {plan.price}
+                    </span>
                     <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                      <span className="font-semibold text-foreground/70">Best for:</span> {plan.bestFor}
+                      <span className="font-semibold text-foreground/70">
+                        Best for:
+                      </span>{" "}
+                      {plan.bestFor}
                     </p>
                   </div>
 
@@ -179,10 +209,16 @@ export function PricingSection() {
                   <ul className="space-y-2.5 mb-8 flex-1">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2.5">
-                        <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "bg-foreground" : "bg-foreground/10"}`}>
-                          <Check className={`w-2.5 h-2.5 ${plan.popular ? "text-primary-foreground" : "text-foreground"}`} />
+                        <div
+                          className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "bg-foreground" : "bg-foreground/10"}`}
+                        >
+                          <Check
+                            className={`w-2.5 h-2.5 ${plan.popular ? "text-primary-foreground" : "text-foreground"}`}
+                          />
                         </div>
-                        <span className="text-sm text-muted-foreground leading-snug">{feature}</span>
+                        <span className="text-sm text-muted-foreground leading-snug">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -204,9 +240,10 @@ export function PricingSection() {
                     href="/onboarding"
                     className={`
                       w-full py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm font-medium transition-all duration-200 group
-                      ${plan.popular
-                        ? "bg-foreground text-primary-foreground hover:bg-foreground/90"
-                        : "border border-foreground/20 text-foreground hover:border-foreground hover:bg-foreground/5"
+                      ${
+                        plan.popular
+                          ? "bg-foreground text-primary-foreground hover:bg-foreground/90"
+                          : "border border-foreground/20 text-foreground hover:border-foreground hover:bg-foreground/5"
                       }
                     `}
                   >
@@ -220,73 +257,147 @@ export function PricingSection() {
         </div>
 
         {/* ── Ongoing Retainer ── */}
-        <div className="rounded-2xl border border-foreground/15 bg-foreground/[0.02] p-6 sm:p-8 mb-6 hover:border-foreground/30 transition-all duration-300">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8">
-            {/* Left: icon + label */}
-            <div className="flex items-center gap-4 shrink-0">
-              <div className="w-12 h-12 rounded-2xl border border-foreground/15 flex items-center justify-center">
-                <RefreshCw className="w-5 h-5 text-foreground" />
-              </div>
-              <div>
-                <span className="font-mono text-xs text-muted-foreground block mb-0.5">04 — 🔁 Ongoing</span>
-                <h3 className="font-display text-xl sm:text-2xl text-foreground leading-tight">"Growth Retainer"</h3>
-                <p className="font-mono text-sm text-foreground mt-1">
-                  $800 – $2,000<span className="text-muted-foreground text-xs">/month</span>
+        <div className="mt-10 relative group rounded-3xl border border-foreground/15 bg-foreground/5 p-1 mb-10 overflow-hidden transition-all duration-500 hover:border-foreground/30">
+          {/* Background decoration */}
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/5 via-transparent to-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+          <div className="relative bg-background rounded-[22px] p-6 sm:p-10">
+            <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+              {/* Left Column: Plan Details */}
+              <div className="lg:w-2/5">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-foreground text-primary-foreground flex items-center justify-center shadow-xl shadow-foreground/10">
+                    <RefreshCw className="w-5 h-5" />
+                  </div>
+                  <span className="font-mono text-[10px] sm:text-xs tracking-widest text-muted-foreground uppercase">
+                    04 — Ongoing Support
+                  </span>
+                </div>
+
+                <h3 className="font-display text-3xl sm:text-4xl text-foreground leading-tight mb-4">
+                  Growth <span className="text-stroke">Retainer</span>
+                </h3>
+
+                <div className="flex items-baseline gap-2 mb-6">
+                  <span className="font-display text-4xl text-foreground">
+                    $800
+                  </span>
+                  <span className="text-muted-foreground text-sm font-mono">
+                    – $2,000 /mo
+                  </span>
+                </div>
+
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-8 max-w-md">
+                  Keep your platform fast, secure, and evolving. Our retainer
+                  provides dedicated hours for continuous improvements and
+                  priority technical support.
                 </p>
+
+                <a
+                  href="/onboarding"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-foreground text-primary-foreground text-sm font-semibold hover:bg-foreground/90 transition-all group"
+                >
+                  Schedule a Consultation
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
+
+              {/* Right Column: Features Grid */}
+              <div className="flex-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  {[
+                    {
+                      title: "Continuous Updates",
+                      desc: "Ongoing fixes and security patches",
+                    },
+                    {
+                      title: "New Features",
+                      desc: "Add pages or functionality as you scale",
+                    },
+                    {
+                      title: "SEO Optimization",
+                      desc: "Monthly health checks and improvements",
+                    },
+                    {
+                      title: "Priority Support",
+                      desc: "Dedicated fast-track communication",
+                    },
+                    {
+                      title: "Performance",
+                      desc: "Regular audits for maximum speed",
+                    },
+                    {
+                      title: "A/B Testing",
+                      desc: "Conversion optimization experiments",
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="p-4 rounded-xl border border-foreground/5 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground mb-0.5">
+                            {item.title}
+                          </p>
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Divider */}
-            <div className="hidden sm:block w-px self-stretch bg-foreground/10" />
-
-            {/* Features */}
-            <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 flex-1">
-              {[
-                "Continuous updates & improvements",
-                "New pages/features",
-                "Performance optimization",
-                "A/B testing & iteration",
-                "Priority support",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-foreground shrink-0" />
-                  <span className="text-xs sm:text-sm text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <a
-              href="/onboarding"
-              className="shrink-0 border border-foreground/20 text-foreground hover:border-foreground hover:bg-foreground/5 py-3 px-6 rounded-xl flex items-center gap-2 text-sm font-medium transition-all duration-200 group"
-            >
-              Let's Talk
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
           </div>
         </div>
 
         {/* ── Add-Ons ── */}
-        <div className="rounded-2xl border border-foreground/15 p-6 sm:p-8 hover:border-foreground/30 transition-all duration-300">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-7 h-7 rounded-lg bg-foreground/8 flex items-center justify-center">
-              <Plus className="w-3.5 h-3.5 text-foreground" />
+        <div className="relative rounded-3xl border border-foreground/10 bg-foreground/[0.02] p-8 sm:p-10 transition-all duration-300">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-xl bg-foreground text-primary-foreground flex items-center justify-center shadow-lg shadow-foreground/5">
+                  <Plus className="w-4 h-4" />
+                </div>
+                <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                  Enhancements
+                </span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-3xl text-foreground">
+                Optional <span className="text-stroke">Add-Ons</span>
+              </h3>
             </div>
-            <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-              ⚙️ Add-Ons
-            </span>
+            <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
+              Tailor your project with specific services designed to amplify
+              your digital impact and reach.
+            </p>
           </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {addons.map((addon) => (
               <div
                 key={addon.name}
-                className="group p-4 rounded-xl border border-foreground/10 hover:border-foreground/30 hover:bg-foreground/[0.03] transition-all duration-200 cursor-default"
+                className="group relative p-6 rounded-2xl border border-foreground/10 bg-background hover:border-foreground/30 hover:shadow-xl hover:shadow-foreground/5 transition-all duration-300 cursor-default overflow-hidden"
               >
-                <p className="text-sm text-foreground font-medium leading-snug mb-2">{addon.name}</p>
-                <p className="font-mono text-xs">
-                  <span className="text-foreground">{addon.price}</span>
-                  <span className="text-muted-foreground">{addon.unit}</span>
-                </p>
+                {/* Subtle hover background decoration */}
+                <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div className="relative z-10">
+                  <p className="text-sm font-semibold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                    {addon.name}
+                  </p>
+                  <div className="font-mono text-xs space-y-1">
+                    <p className="text-foreground font-bold">{addon.price}</p>
+                    <p className="text-muted-foreground text-[10px] uppercase tracking-wider">
+                      {addon.unit ? addon.unit : "one-time"}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

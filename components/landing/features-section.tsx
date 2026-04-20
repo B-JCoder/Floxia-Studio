@@ -374,7 +374,7 @@ function SecurityVisual() {
         fill="currentColor"
         opacity="0.45"
       >
-        95+ PageSpeed
+        99+ PageSpeed
       </text>
 
       {/* Scan line */}

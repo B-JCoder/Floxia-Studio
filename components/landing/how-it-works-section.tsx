@@ -37,14 +37,14 @@ site.build({
   {
     number: "III",
     title: "Launch & Grow",
-    description: "We launch your site with full security hardening, speed optimization, and a 95+ PageSpeed score. Then we hand over the keys — with 30 days of post-launch support included.",
+    description: "We launch your site with full security hardening, speed optimization, and a 99+ PageSpeed score. Then we hand over the keys — with 30 days of post-launch support included.",
     filename: "launch.ts",
     code: `// Floxia Studio - Launch Phase
 
 site.deploy({
   ssl: true,
   cdn: 'cloudflare',
-  pagespeed: '95+',
+  pagespeed: '99+',
   support: '30-days-included'
 })
 
@@ -94,7 +94,7 @@ export function HowItWorksSection() {
         }} />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <div className="mb-10 lg:mb-16">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-background/50 mb-4">
@@ -166,7 +166,7 @@ export function HowItWorksSection() {
               </div>
 
               {/* Code content */}
-              <div className="p-8 font-mono text-sm min-h-[280px]">
+              <div className="p-4 sm:p-8 font-mono text-xs sm:text-sm min-h-[280px] overflow-x-auto">
                 <pre className="text-background/70">
                   {steps[activeStep].code.split('\n').map((line, lineIndex) => (
                     <div 

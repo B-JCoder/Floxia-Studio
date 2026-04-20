@@ -40,7 +40,7 @@ const services = [
     icon: Zap,
     title: "Next.js & React Development",
     subtitle: "The Gold Standard in Modern Web Performance",
-    lead: "For businesses that demand the absolute best in speed, SEO performance, and scalability — Next.js and React is the gold standard, delivering page load speeds that consistently score 95–100 on Google PageSpeed Insights.",
+    lead: "For businesses that demand the absolute best in speed, SEO performance, and scalability — Next.js and React is the gold standard, delivering page load speeds that consistently score 99–100 on Google PageSpeed Insights.",
     paras: [
       "Next.js enables us to build websites with server-side rendering (SSR), static site generation (SSG), and edge-optimized deployment. We build Next.js applications for SaaS platforms, high-traffic marketing websites, complex e-commerce frontends, content portals, and enterprise web applications.",
       "Our React component architecture ensures that your codebase is maintainable, scalable, and ready to grow with your business for years to come. TypeScript-first, tested, and production-hardened.",
@@ -49,7 +49,7 @@ const services = [
       "Server-side rendering (SSR)",
       "Static site generation (SSG)",
       "Edge-optimized deployment",
-      "95+ PageSpeed scores",
+      "99+ PageSpeed scores",
       "TypeScript-first codebase",
       "Scalable component design",
       "SaaS & enterprise ready",
@@ -494,8 +494,8 @@ export function ServicesListSection() {
           >
             {[
               { val: "10+", label: "Core Services" },
-              { val: "50+", label: "Projects Delivered" },
-              { val: "95+", label: "Avg PageSpeed Score" },
+              { val: "10+", label: "Projects Delivered" },
+              { val: "99+", label: "Avg PageSpeed Score" },
               { val: "24h", label: "Response Guarantee" },
             ].map((s, i) => (
               <div

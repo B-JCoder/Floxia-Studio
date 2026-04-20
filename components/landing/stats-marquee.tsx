@@ -27,12 +27,12 @@ export function StatsMarquee() {
                   company: "FLOXIA STUDIO",
                 },
                 {
-                  value: "99%",
+                  value: "100%",
                   label: "client satisfaction rate",
                   company: "OUR CLIENTS",
                 },
                 {
-                  value: "95+",
+                  value: "99+",
                   label: "PageSpeed score, every build",
                   company: "GOOGLE LIGHTHOUSE",
                 },
@@ -42,7 +42,7 @@ export function StatsMarquee() {
                   company: "SEO RESULTS",
                 },
                 {
-                  value: "50+",
+                  value: "10+",
                   label: "websites launched",
                   company: "FLOXIA STUDIO",
                 },

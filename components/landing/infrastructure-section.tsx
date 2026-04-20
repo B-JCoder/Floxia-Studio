@@ -67,11 +67,11 @@ export function InfrastructureSection() {
                 <div className="text-sm text-muted-foreground">Web technologies mastered</div>
               </div>
               <div>
-                <div className="text-4xl lg:text-5xl font-display mb-2">99%</div>
+                <div className="text-4xl lg:text-5xl font-display mb-2">100%</div>
                 <div className="text-sm text-muted-foreground">Client satisfaction rate</div>
               </div>
               <div>
-                <div className="text-4xl lg:text-5xl font-display mb-2">95+</div>
+                <div className="text-4xl lg:text-5xl font-display mb-2">99+</div>
                 <div className="text-sm text-muted-foreground">PageSpeed on every build</div>
               </div>
             </div>

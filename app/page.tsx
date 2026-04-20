@@ -6,8 +6,8 @@ import { InfrastructureSection } from "@/components/landing/infrastructure-secti
 import { MetricsSection } from "@/components/landing/metrics-section";
 import { IntegrationsSection } from "@/components/landing/integrations-section";
 import { SecuritySection } from "@/components/landing/security-section";
-import { DevelopersSection } from "@/components/landing/developers-section";
-import { TestimonialsSection } from "@/components/landing/testimonials-section";
+// import { DevelopersSection } from "@/components/landing/developers-section";
+// import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { PricingSection } from "@/components/landing/pricing-section";
 import { CTASection } from "@/components/landing/cta-section";
 import { BlogSection } from "@/components/landing/blog-section";
@@ -17,7 +17,7 @@ import { WhoWeAreSection } from "@/components/landing/who-we-are-section";
 import { WhatWeDoSection } from "@/components/landing/what-we-do-section";
 import { TechStackSection } from "@/components/landing/tech-stack-section";
 import { WhyChooseUsSection } from "@/components/landing/why-choose-us-section";
-import { SocialProofSection } from "@/components/landing/social-proof-section";
+// import { SocialProofSection } from "@/components/landing/social-proof-section";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -80,8 +80,8 @@ export default function Home() {
 
       <IntegrationsSection />
       <SecuritySection />
-      <DevelopersSection />
-      <TestimonialsSection />
+      {/* <DevelopersSection /> */}
+      {/* <TestimonialsSection /> */}
       <PricingSection />
 
       <CTASection />
