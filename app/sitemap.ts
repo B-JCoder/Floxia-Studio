@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getPosts } from '@/lib/wordpress'
+import { niches } from '@/lib/niches'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://floxiastudio.com'
@@ -13,6 +14,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Generate URLs for all niche landing pages
+  const nicheUrls = Object.keys(niches).map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.9,
+  }))
+
   const staticUrls: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
@@ -23,5 +32,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
   ]
 
-  return [...staticUrls, ...blogUrls]
+  return [...staticUrls, ...blogUrls, ...nicheUrls]
 }
