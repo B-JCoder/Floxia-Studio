@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { NicheData } from "@/lib/niches";
 import { AnimatedSphere } from "../landing/animated-sphere";
+import { motion } from "framer-motion";
 
 export function LandingHero({ niche }: { niche: NicheData }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -57,7 +58,16 @@ export function LandingHero({ niche }: { niche: NicheData }) {
             className={`font-display leading-[1.1] tracking-tight transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             style={{ fontSize: "clamp(2rem, 4vw, 4.1rem)" }}
           >
-            {niche.hero.headline}
+            {niche.hero.headline.split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.1, delay: i * 0.04 }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </h1>
         </div>
 
