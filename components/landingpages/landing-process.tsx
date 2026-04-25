@@ -1,11 +1,42 @@
+"use client";
+
 import { NicheData } from "@/lib/niches";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export function LandingProcess({ niche }: { niche: NicheData }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
   return (
     <section
+      ref={ref}
       id="process"
       className="py-12 lg:py-16 bg-muted/20 relative overflow-hidden"
     >
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden flex items-end opacity-[0.06]">
+          <h3 className="absolute left-1/2 -translate-x-1/2 bottom-10 text-[clamp(10rem,23vw,100rem)] font-display font-bold select-none pointer-events-none translate-y-1/4 uppercase leading-none whitespace-nowrap">
+            {"PROCESS".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: [0, 1, 1, 0] } : { opacity: 0 }}
+                transition={{ 
+                  duration: 4, 
+                  times: [0, 0.1, 0.8, 1],
+                  repeat: Infinity, 
+                  delay: i * 0.15,
+                  ease: "easeInOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h3>
+        </div>
+      </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-[1400px] mx-auto lg:px-12">
           <div className="max-w-3xl mb-8 lg:mb-12 mx-auto text-center">
@@ -27,9 +58,9 @@ export function LandingProcess({ niche }: { niche: NicheData }) {
             {niche.process.steps.map((step, i) => (
               <div
                 key={i}
-                className="p-8 sm:p-10 lg:p-12 bg-background group hover:bg-muted/50 transition-all duration-500"
+                className="p-8 sm:p-10 lg:p-12 bg-muted/60 group hover:bg-muted/50 transition-all duration-500"
               >
-                <div className="text-4xl sm:text-6xl font-display font-bold text-foreground/5 group-hover:text-primary/20 transition-colors duration-500 mb-6 sm:mb-8">
+                <div className="text-4xl sm:text-6xl font-display font-bold text-foreground/25 group-hover:text-primary/20 transition-colors duration-500 mb-6 sm:mb-8">
                   0{i + 1}
                 </div>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-display font-bold mb-4 sm:mb-6 group-hover:translate-x-2 transition-transform duration-500">

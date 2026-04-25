@@ -5,22 +5,37 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 export function LandingEmotionalBridge({ niche }: { niche: NicheData }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref);
   const isVisible = isInView;
 
   return (
-    <section className="py-16 lg:py-24 bg-foreground text-background relative overflow-hidden">
+    <section ref={ref} className="py-16 lg:py-24 bg-foreground text-background relative overflow-hidden">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden flex items-end opacity-[0.03]">
-          <div className="absolute right-0 bottom-0 text-[15vw] font-display font-bold opacity-[0.03] select-none pointer-events-none translate-y-1/4 translate-x-1/4 uppercase leading-none">
-            Bridges
-          </div>
+          <h3 className="absolute left-1/2 -translate-x-1/2 bottom-10 text-[clamp(10rem,25vw,100rem)] font-display font-bold select-none pointer-events-none translate-y-1/4 uppercase leading-none whitespace-nowrap">
+            {"BRIDGE".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={isVisible ? { opacity: [0, 1, 1, 0] } : { opacity: 0 }}
+                transition={{ 
+                  duration: 4, 
+                  times: [0, 0.1, 0.8, 1],
+                  repeat: Infinity, 
+                  delay: i * 0.15,
+                  ease: "easeInOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h3>
         </div>
       </div>
 
@@ -36,7 +51,6 @@ export function LandingEmotionalBridge({ niche }: { niche: NicheData }) {
             </div>
 
             <h2
-              ref={ref}
               className={`font-display leading-[1.1] tracking-tight transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ fontSize: "clamp(2rem, 4vw, 3.1rem)" }}
             >
