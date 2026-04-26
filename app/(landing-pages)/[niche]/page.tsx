@@ -11,6 +11,7 @@ import { LandingProcess } from "@/components/landingpages/landing-process";
 import { LandingFit } from "@/components/landingpages/landing-fit";
 import { LandingEmotionalBridge } from "@/components/landingpages/landing-emotional-bridge";
 import { LandingTestimonials } from "@/components/landingpages/landing-testimonials";
+import { LandingRoiCalculator } from "@/components/landingpages/landing-roi-calculator";
 import { LandingFaqs } from "@/components/landingpages/landing-faqs";
 import { LandingLeadForm } from "@/components/landingpages/landing-lead-form";
 import { LandingFooter } from "@/components/landingpages/landing-footer";
@@ -136,7 +137,11 @@ export default async function NicheLandingPage({ params }: PageProps) {
         <div id="testimonials">
           <LandingTestimonials niche={nicheData} />
         </div>
-        
+
+        {niche === "therapists" && (
+          <LandingRoiCalculator niche={nicheData} />
+        )}
+
         <div id="faqs">
           <LandingFaqs niche={nicheData} />
         </div>
