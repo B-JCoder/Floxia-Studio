@@ -30,7 +30,7 @@ export function CTASection({
   description = "Whether you're launching your first business website, scaling an e-commerce operation, or rebuilding a digital platform that no longer serves your growth Floxia Studio is ready to be your partner.",
   primaryCta = {
     label: "Schedule a Free Discovery Call",
-    href: "https://calendly.com/aithinkagents/30min",
+    href: "https://calendly.com/floxiastudio/30min",
     external: true,
   },
   secondaryCta = {
@@ -73,9 +73,8 @@ export function CTASection({
         {/* Stats strip */}
         {showStats && stats && (
           <div
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             {stats.map((stat, i) => (
               <div
@@ -96,11 +95,10 @@ export function CTASection({
 
         {/* Main CTA card */}
         <div
-          className={`p-8 sm:p-12 lg:p-16 rounded-3xl bg-foreground text-primary-foreground relative overflow-hidden transition-all duration-1000 ${
-            isVisible
+          className={`p-8 sm:p-12 lg:p-16 rounded-3xl bg-foreground text-primary-foreground relative overflow-hidden transition-all duration-1000 ${isVisible
               ? "opacity-100 scale-100 translate-y-0"
               : "opacity-0 scale-95 translate-y-12"
-          }`}
+            }`}
           style={{ transitionDelay: showStats ? "200ms" : "0ms" }}
         >
           {/* Decorative blurs */}
