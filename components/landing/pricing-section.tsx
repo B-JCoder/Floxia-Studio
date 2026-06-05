@@ -146,10 +146,9 @@ export function PricingSection() {
                 key={plan.id}
                 className={`
                   relative flex flex-col rounded-2xl border transition-all duration-300 hover-lift
-                  ${
-                    plan.popular
-                      ? "border-foreground shadow-2xl shadow-foreground/10 md:-mt-4 md:-mb-4"
-                      : "border-foreground/15 hover:border-foreground/40"
+                  ${plan.popular
+                    ? "border-foreground shadow-2xl shadow-foreground/10 md:-mt-4 md:-mb-4"
+                    : "border-foreground/15 hover:border-foreground/40"
                   }
                 `}
               >
@@ -240,10 +239,9 @@ export function PricingSection() {
                     href="/onboarding"
                     className={`
                       w-full py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm font-medium transition-all duration-200 group
-                      ${
-                        plan.popular
-                          ? "bg-foreground text-primary-foreground hover:bg-foreground/90"
-                          : "border border-foreground/20 text-foreground hover:border-foreground hover:bg-foreground/5"
+                      ${plan.popular
+                        ? "bg-foreground text-primary-foreground hover:bg-foreground/90"
+                        : "border border-foreground/20 text-foreground hover:border-foreground hover:bg-foreground/5"
                       }
                     `}
                   >
@@ -407,7 +405,7 @@ export function PricingSection() {
         <p className="mt-12 text-center text-sm text-muted-foreground">
           Not sure which plan fits?{" "}
           <a
-            href="https://calendly.com/aithinkagents/30min"
+            href="https://calendly.com/floxiastudio/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground underline underline-offset-4 hover:no-underline transition-all"
