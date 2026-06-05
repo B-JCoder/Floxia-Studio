@@ -50,7 +50,7 @@ export default function ContactPage() {
         }
         primaryCta={{
           label: "Book a Free Consultation",
-          href: "https://calendly.com/aithinkagents/30min",
+          href: "https://calendly.com/floxiastudio/30min",
           external: true,
         }}
         secondaryCta={{ label: "View Our Work", href: "/#work" }}
